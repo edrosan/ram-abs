@@ -1,6 +1,16 @@
 //* Mostrar con formato */
 use crate::est;
 
+
+
+pub fn tam_disponible(lista: &Vec<est::Nodo>){
+    for nodo in lista {
+        if nodo.tipo == "H" {
+            println!("Espacio disponible: {}", nodo.pos_final - nodo.pos_inicial + 1);
+        }
+    }
+}
+
 pub fn mapa(mapa: &Vec<[i32; 8]>) {
 
     for fila in mapa.iter() {
@@ -16,9 +26,9 @@ pub fn mapa(mapa: &Vec<[i32; 8]>) {
 }
 
 pub fn procesos(tabla: &Vec<est::Proceso>) {
-    println!("----Procesos--------");
+    println!("----Procesos-----------");
     for proceso in tabla.iter() {
-        println!("--{}--", proceso.pid);
+        println!("--{}---{}", proceso.pid, !proceso.sub);
     }
     println!("--------------------");
 }

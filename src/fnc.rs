@@ -1,5 +1,7 @@
 use crate::est;
 
+
+
 pub fn crear_obj(pid: u32, tam: u8, extra: u8) -> est::Proceso {
     est::Proceso{pid:pid, tam:tam, extra:extra, sub:false}
 }

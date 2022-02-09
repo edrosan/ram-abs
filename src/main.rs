@@ -15,14 +15,9 @@ fn main() {
     const N: u8 = TAM / 8;
     let mut opcion_proceso = String::new();
 
-    //* Arrays's */
     let mut ram = vec![0; TAM as usize];
     let mut mapa_bits = vec![[0; 8]; N as usize];
-    println!("{:?}", mapa_bits[0][0]);
-
-
     let mut lista_ligada = fnc::crear_lista(&ram);
-
 
     while run {
         println!("------Menu----------");
@@ -37,6 +32,7 @@ fn main() {
         match opcion.trim().parse::<i32>().unwrap() {
             1 => {
                 println!("--------------------");
+                print::tam_disponible(&lista_ligada);
                 println!("Ingrese el tamaño del proceso");
                 io::stdin().read_line(&mut opcion_proceso).expect("Ha ocurrido un error");
                 tam_proceso = opcion_proceso.trim().parse::<u16>().unwrap();
@@ -52,8 +48,11 @@ fn main() {
                     pid = pid + 1;
                     mapa_bits = fnc::crear_mapa(&ram, &mapa_bits);
                     lista_ligada = fnc::crear_lista(&ram);
-                } else {
+                } else if tam_total > ram.len() as u8 {
+                    println!("El proceso supera el tamaño de la memoria");
+                }else {
                     println!("No hay espacio suficiente");
+                    println!("Elimine algun proceso");
                 }
             }
             2 => {
